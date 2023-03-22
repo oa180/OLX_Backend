@@ -1,0 +1,66 @@
+{
+	"info": {
+		"_postman_id": "fde1cd38-7ef2-4d84-9c7b-a645e8f3c54a",
+		"name": "Like",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "16607797"
+	},
+	"item": [
+		{
+			"name": "Like A post",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{jwt}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [],
+				"url": {
+					"raw": "{{URL}}post/likes/2",
+					"host": [
+						"{{URL}}post"
+					],
+					"path": [
+						"likes",
+						"2"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get Likes on A Post",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{jwt}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{URL}}post/likes/1",
+					"host": [
+						"{{URL}}post"
+					],
+					"path": [
+						"likes",
+						"1"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}

@@ -1,0 +1,24 @@
+{
+	"info": {
+		"_postman_id": "3eb53038-52e5-49f8-97fa-559ed15bb620",
+		"name": "Feed",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "16607797"
+	},
+	"item": [
+		{
+			"name": "Get Feed",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{URL}}feed",
+					"host": [
+						"{{URL}}feed"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}

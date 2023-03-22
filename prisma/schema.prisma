@@ -1,0 +1,108 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model User {
+  id       Int       @id @unique @default(autoincrement())
+  fname    String
+  lname    String
+  email    String    @unique
+  password String
+  phone    String
+  dob      DateTime
+  role     String    @default("user")
+  gender   String    @default("none")
+  posts    Post[]
+  comments Comment[]
+  likes    Like[]
+  favList  FavList[]
+  orders   Order[]
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+model Post {
+  id            Int      @id @default(autoincrement())
+  contactMethod String
+  author        User     @relation(fields: [userId], references: [id], onDelete: Restrict, onUpdate: Cascade)
+  userId        Int
+  pname         String
+  category      Category @relation(fields: [categoryId], references: [id], onDelete: Cascade, onUpdate: Cascade)
+  categoryId    Int
+
+  images      String[]
+  delivery    Boolean
+  description String?
+  price       Float
+  comments    Comment[]
+  likes       Like[]
+  favList     FavList[]
+  orders      Order[]
+  createdAt   DateTime  @default(now())
+  updatedAt   DateTime  @updatedAt
+}
+
+model Comment {
+  date      DateTime
+  content   String
+  author    User     @relation(fields: [userId], references: [id], onDelete: Cascade, onUpdate: Cascade)
+  userId    Int
+  post      Post     @relation(fields: [postId], references: [id], onDelete: Cascade, onUpdate: Cascade)
+  postId    Int
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@id([userId, postId])
+}
+
+model Like {
+  date      DateTime
+  author    User     @relation(fields: [userId], references: [id], onDelete: Cascade, onUpdate: Cascade)
+  userId    Int
+  post      Post     @relation(fields: [postId], references: [id], onDelete: Cascade, onUpdate: Cascade)
+  postId    Int
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@id([userId, postId])
+}
+
+model FavList {
+  author    User     @relation(fields: [userId], references: [id], onDelete: Cascade, onUpdate: Cascade)
+  userId    Int
+  post      Post     @relation(fields: [postId], references: [id], onDelete: Cascade, onUpdate: Cascade)
+  postId    Int
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@id([userId, postId])
+}
+
+model Order {
+  date      DateTime
+  payement  String   @default("CASH")
+  price     Float
+  author    User     @relation(fields: [userId], references: [id], onDelete: Cascade, onUpdate: Cascade)
+  userId    Int
+  post      Post     @relation(fields: [postId], references: [id], onDelete: Cascade, onUpdate: Cascade)
+  postId    Int
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@id([userId, postId])
+}
+
+model Category {
+  id      Int    @id @default(autoincrement())
+  name    String
+  Product Post[]
+}
