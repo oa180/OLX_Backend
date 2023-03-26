@@ -9,8 +9,8 @@ import { EmailController } from './email.controller';
       transport: {
         host: 'smtp.sendgrid.net',
         auth: {
-          user: 'apikey',
-          pass: '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',
+          user: '',
+          pass: '',
         },
       },
     }),
